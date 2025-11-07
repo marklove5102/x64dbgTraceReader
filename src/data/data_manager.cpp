@@ -754,6 +754,8 @@ std::vector<ns_xtr::memadata> ns_xtr::data_manager::getEntryMemaData(_DWORD Nth_
 		const auto& mem_acc_new = nth_ins.getMemoryAccessesNew();
 		const auto& mem_acc_old = nth_ins.getMemoryAccessesOld();
 
+		_DWORD idx_new = 0;
+
 		for (_DWORD i = 0; i < mem_acc_flags.size(); i++) 
 		{
 			memadata entryMemoryData; // all fields zero by default
@@ -761,7 +763,7 @@ std::vector<ns_xtr::memadata> ns_xtr::data_manager::getEntryMemaData(_DWORD Nth_
 			if (mem_acc_flags[i])
 			{
 				entryMemoryData.memtype = MEMATYPE_WRITE;
-				entryMemoryData.new_val = mem_acc_new[i];
+				entryMemoryData.new_val = mem_acc_new[idx_new++];
 			}
 			else
 			{
@@ -1148,4 +1150,5 @@ void ns_xtr::data_manager::_TRACE64FORMAT_BYTE7_writeMemoryAccessFields(_DWORD N
 	{
 		_appendToNewFileBuf(mem_acc_new[i]);
 	}
+
 }
